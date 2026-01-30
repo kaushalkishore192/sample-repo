@@ -1,9 +1,9 @@
-name: Deploy to GCP Linux Server
+name: Deploy to GCP Linux Server (via gcloud)
 
 on:
   push:
     branches:
-      - main   # Trigger deployment only on pushes to main branch
+      - main
 
 jobs:
   deploy:
@@ -13,16 +13,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up SSH
-        uses: webfactory/ssh-agent@v0.9.0
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
         with:
-          ssh-private-key: ${{ secrets.GCP_SSH_PRIVATE_KEY }}
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
 
-      - name: Deploy files to GCP server
+      - name: Deploy files to GCP VM
         run: |
-          ssh -o StrictHostKeyChecking=no git-to-gcp@${{ secrets.GCP_HOST }} << 'EOF'
-            cd /home/giet13ee092/project1
-            git pull origin main
-            # Restart services if needed
-            # sudo systemctl restart myapp.service
-          EOF
+          gcloud compute ssh ${{ secrets.GCP_VM_USER }}@${{ secrets.GCP_VM_NAME }} \
+            --command="cd /home/giet13ee092/project1 && git pull origin main"
