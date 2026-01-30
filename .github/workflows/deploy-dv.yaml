@@ -35,7 +35,7 @@ jobs:
           mkdir /home/giet13ee092/project2
 
       # Step 4: Run deployment commands on VM
-      - name: Run deployment commands on VM
-        run: |
+      # - name: Run deployment commands on VM
+      #   run: |
           # gcloud compute ssh ${{ secrets.GCP_VM_USER }}@${{ secrets.GCP_VM_NAME }} \
           #   --command="cd /home/giet13ee092/project1 && sudo systemctl restart myapp.service"
