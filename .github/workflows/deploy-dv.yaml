@@ -20,7 +20,13 @@ jobs:
           service_account_key: ${{ secrets.GCP_SA_KEY }}
           export_default_credentials: true
 
-      - name: Deploy files to GCP VM
+      - name: Copy files to VM
+        run: |
+          gcloud compute scp --recurse ./ \
+            ${{ secrets.GCP_VM_USER }}@${{ secrets.GCP_VM_NAME }}:/home/giet13ee092/project1 \
+            --zone=${{ secrets.GCP_VM_ZONE }}
+
+      - name: Run deployment commands on VM
         run: |
           gcloud compute ssh ${{ secrets.GCP_VM_USER }}@${{ secrets.GCP_VM_NAME }} \
-            --command="cd /home/giet13ee092/project1 && git pull origin main"
+            --command="cd /home/giet13ee092/project1 && sudo systemctl restart myapp.service"
