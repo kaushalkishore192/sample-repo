@@ -32,6 +32,7 @@ jobs:
           #   ${{ secrets.GCP_VM_USER }}@${{ secrets.GCP_VM_NAME }}:/home/giet13ee092/project1  \
           #   --zone=${{ secrets.GCP_VM_ZONE }}
           echo $(whoami)
+          echo $(pwd)
 
       # Step 4: Run deployment commands on VM
       # - name: Run deployment commands on VM
