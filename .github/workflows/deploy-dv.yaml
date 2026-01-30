@@ -25,6 +25,12 @@ jobs:
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
 
+      - name: Configure Git user
+        run: |
+          git config --global user.name "Kaushal"
+          git config --global user.email "kaushal@example.com"
+
+
       # Step 3: Copy files to VM
       - name: Copy files to VM
         run: |
