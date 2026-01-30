@@ -31,7 +31,7 @@ jobs:
           # gcloud compute scp --recurse ./ \
           #   ${{ secrets.GCP_VM_USER }}@${{ secrets.GCP_VM_NAME }}:/home/giet13ee092/project1  \
           #   --zone=${{ secrets.GCP_VM_ZONE }}
-          gcloud comput mkdir test
+          gcloud compute mkdir test
 
       # Step 4: Run deployment commands on VM
       - name: Run deployment commands on VM
