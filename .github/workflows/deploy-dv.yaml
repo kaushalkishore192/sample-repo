@@ -28,9 +28,10 @@ jobs:
       # Step 3: Copy files to VM
       - name: Copy files to VM
         run: |
-          gcloud compute scp --recurse ./ \
-            ${{ secrets.GCP_VM_USER }}@${{ secrets.GCP_VM_NAME }}:/home/giet13ee092/project1  \
-            --zone=${{ secrets.GCP_VM_ZONE }}
+          # gcloud compute scp --recurse ./ \
+          #   ${{ secrets.GCP_VM_USER }}@${{ secrets.GCP_VM_NAME }}:/home/giet13ee092/project1  \
+          #   --zone=${{ secrets.GCP_VM_ZONE }}
+          gcloud comput mkdir test
 
       # Step 4: Run deployment commands on VM
       - name: Run deployment commands on VM
